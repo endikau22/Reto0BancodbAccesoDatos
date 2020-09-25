@@ -5,6 +5,8 @@
  */
 package elBanco;
 
+import controlador.Dao;
+
 /**
  * Clase principal
  * @author 2dam
@@ -17,20 +19,28 @@ public class Application {
            opc = menu();
            switch (opc){
                case 1:
+                   crearNuevoCliente();
                    break;
                case 2:
+                   consultarCliente();
                    break;
                case 3:
+                   consultarCuentasCliente();
                    break;
                case 4:
+                   crearCuenta();
                    break;
                case 5:
+                   agregarClienteCuenta();
                    break;
                case 6:
+                   consultarDatosCuenta();
                    break;
                case 7:
+                   movimientoCuenta();
                    break;
                case 8:
+                   consultarMovimientos();
                    break;
                case 9:
                    System.out.println("Gracias.");
@@ -55,5 +65,45 @@ public class Application {
         System.out.println("9.-Salir.");
         opc = utilidades.Utilidades.leerInt(1, 9);
         return opc;
+    }
+
+    private static void crearNuevoCliente() {
+       Dao dao = new Dao();
+       dao.crearNuevoCliente();
+    }
+
+    private static void consultarCliente() {
+       Dao dao = new Dao();
+       dao.consultarCliente();
+    }
+
+    private static void consultarCuentasCliente() {
+       Dao dao = new Dao(); 
+       dao.consultarCuentasCliente();
+    }
+
+    private static void crearCuenta() {
+       Dao dao = new Dao(); 
+       dao.crearCuenta();
+    }
+
+    private static void agregarClienteCuenta() {
+       Dao dao = new Dao();
+       dao.agregarClienteCuenta();
+    }
+
+    private static void consultarDatosCuenta() {
+       Dao dao = new Dao();
+       dao.consultarDatosCuenta();
+    }
+
+    private static void movimientoCuenta() {
+       Dao dao = new Dao();
+       dao.movimientoCuenta();
+    }
+
+    private static void consultarMovimientos() {
+       Dao dao = new Dao();
+       dao.consultarMovimientos();
     }
 }

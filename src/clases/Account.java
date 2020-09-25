@@ -42,6 +42,15 @@ public class Account implements Serializable{
         this.beginBalanceTimestamp = beginBalanceTimestamp;
         this.type = type;
     }
+    
+    public void setDatos(){
+        System.out.println("Introduce id de la cuenta: ");
+        this.accountId = utilidades.Utilidades.leerInt();
+        System.out.println("Introduce la descripcion de la cuenta: ");
+        this.description = utilidades.Utilidades.introducirCadena();
+        System.out.println("Introduce balance inicial: ");
+        this.beginBalance = utilidades.Utilidades.leerDouble();
+    }
      
     //GETTERS Y SETTERS
 

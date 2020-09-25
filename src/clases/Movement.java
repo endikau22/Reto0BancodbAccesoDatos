@@ -33,6 +33,12 @@ public class Movement implements Serializable{
         this.description = description;
         this.databaseDate = databaseDate;
     }
+    
+    public void setDatos(){
+        System.out.println("Introduce la cantidad: ");
+        this.ammount = utilidades.Utilidades.leerDouble(0,5000);
+        System.out.println("Introduce ");
+    }
 
     public long getMovementId() {
         return movementId;
