@@ -37,7 +37,6 @@ public class Movement implements Serializable{
     public void setDatos(){
         System.out.println("Introduce la cantidad: ");
         this.ammount = utilidades.Utilidades.leerDouble(0,5000);
-        System.out.println("Introduce ");
     }
 
     public long getMovementId() {

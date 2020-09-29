@@ -8,6 +8,7 @@ package controlador;
 import clases.Customer;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
@@ -20,13 +21,29 @@ public class Dao {
     private Connection con;
     private Statement stmt;
     
-    private ResourceBundle fichero;
+    
+    //private ResourceBundle fichero
+    ResourceBundle fichero;
+    private String dbBanco;
+    private String url;
+    private String user;
+    private String passwd;
+    private String driver;
+   
+    public Dao() {
+       fichero = ResourceBundle.getBundle("controlador.config");
+       dbBanco = fichero.getString("DB");
+       url = fichero.getString("Conn");
+       user = fichero.getString("DBUser");
+       passwd = fichero.getString("DBPass");
+       driver = fichero.getString("Driver");
+    }
+    
     
 
 	private void openConnection() throws Exception {
-		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://localhost/bdproyectotrenes";
-		con = DriverManager.getConnection(url, "endika", "abcd*1234");
+                Class.forName(driver);
+		con = DriverManager.getConnection(url,user,passwd);
 		stmt = con.createStatement();
 	}
 
@@ -35,37 +52,47 @@ public class Dao {
 		con.close();
 	}
 
-    public void crearNuevoCliente() {
+    public void crearNuevoCliente() throws Exception {
         Customer oneCustomer = new Customer();
         oneCustomer.setDatos();
-        
+        openConnection();
+        //String insert = "Insert into customer ("
+        //stmt.executeUpdate(insert);
     }
 
-    public void consultarCliente() {
-        
+    public void consultarCliente()throws Exception {
+        String select = "Select * from customer where lastName is Wallace";
+        openConnection();
+        ResultSet rs = stmt.executeQuery(select);
+        while(rs.next()){
+            System.out.println(rs.getLong(1)+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5)+" "+rs.getString(6)+" "+rs.getString(7)
+        +" "+rs.getInt(8));
+        }
+        rs.close();
+        closeConnection();
     }
 
-    public void consultarCuentasCliente() {
+    public void consultarCuentasCliente()throws Exception {
        
     }
 
-    public void crearCuenta() {
+    public void crearCuenta()throws Exception {
       
     }
 
-    public void agregarClienteCuenta() {
+    public void agregarClienteCuenta()throws Exception {
         
     }
 
-    public void consultarDatosCuenta() {
+    public void consultarDatosCuenta() throws Exception{
        
     }
 
-    public void movimientoCuenta() {
+    public void movimientoCuenta()throws Exception {
        
     }
 
-    public void consultarMovimientos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void consultarMovimientos() throws Exception{
+        
     }
 }

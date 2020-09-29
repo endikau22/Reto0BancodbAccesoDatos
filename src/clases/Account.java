@@ -2,6 +2,7 @@ package clases;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 /**
  * La clase Account se utiliza para leer y escribir cuentas bancarias en una base de datos de un Banco.
@@ -18,7 +19,7 @@ public class Account implements Serializable{
     private double balance;
     private double creditLine;
     private double beginBalance;
-    private Timestamp beginBalanceTimestamp;//o LOCALDATE
+    private LocalDate beginBalanceTimestamp;//o LOCALDATE o Timestamp
     /**Tipo de la cuenta*/
     private int type;
     
@@ -33,7 +34,7 @@ public class Account implements Serializable{
      * @param balance
      * @param beginBalanceTimestamp
      * @param type*/
-    public Account(long accountId, String description, double balance, double creditLine, double beginBalance, Timestamp beginBalanceTimestamp, int type) {
+    public Account(long accountId, String description, double balance, double creditLine, double beginBalance, LocalDate beginBalanceTimestamp, int type) {
         this.accountId = accountId;
         this.description = description;
         this.balance = balance;
@@ -99,7 +100,7 @@ public class Account implements Serializable{
      *
      * @return La fecha de inicio de la cuenta.
      */
-    public Timestamp getBeginBalanceTimestamp() {
+    public LocalDate getBeginBalanceTimestamp() {
         return beginBalanceTimestamp;
     }
 
@@ -155,7 +156,7 @@ public class Account implements Serializable{
      *
      * @param beginBalanceTimestamp
      */
-    public void setBeginBalanceTimestamp(Timestamp beginBalanceTimestamp) {
+    public void setBeginBalanceTimestamp(LocalDate beginBalanceTimestamp) {
         this.beginBalanceTimestamp = beginBalanceTimestamp;
     }
 

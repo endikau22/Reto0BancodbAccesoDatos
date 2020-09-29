@@ -6,6 +6,8 @@
 package elBanco;
 
 import controlador.Dao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Clase principal
@@ -69,41 +71,74 @@ public class Application {
 
     private static void crearNuevoCliente() {
        Dao dao = new Dao();
-       dao.crearNuevoCliente();
+        try {
+            dao.crearNuevoCliente();
+        } catch (Exception ex) {
+            System.out.println("Se ha producido un error al crear un nuevo cliente.");
+        }
     }
 
     private static void consultarCliente() {
        Dao dao = new Dao();
-       dao.consultarCliente();
+        try {
+            dao.consultarCliente();
+        } catch (Exception ex) {
+            System.out.println("No hay clientes en la base de datos.");
+            ex.printStackTrace();
+        }
     }
 
     private static void consultarCuentasCliente() {
        Dao dao = new Dao(); 
-       dao.consultarCuentasCliente();
+        try {
+            dao.consultarCuentasCliente();
+        } catch (Exception ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void crearCuenta() {
        Dao dao = new Dao(); 
-       dao.crearCuenta();
+        try {
+            dao.crearCuenta();
+        } catch (Exception ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void agregarClienteCuenta() {
        Dao dao = new Dao();
-       dao.agregarClienteCuenta();
+        try {
+            dao.agregarClienteCuenta();
+        } catch (Exception ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void consultarDatosCuenta() {
        Dao dao = new Dao();
-       dao.consultarDatosCuenta();
+        try {
+            dao.consultarDatosCuenta();
+        } catch (Exception ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void movimientoCuenta() {
        Dao dao = new Dao();
-       dao.movimientoCuenta();
+        try {
+            dao.movimientoCuenta();
+        } catch (Exception ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void consultarMovimientos() {
        Dao dao = new Dao();
-       dao.consultarMovimientos();
+        try {
+            dao.consultarMovimientos();
+        } catch (Exception ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
