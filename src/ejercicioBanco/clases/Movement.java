@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package ejercicioBanco.clases;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -36,7 +36,7 @@ public class Movement implements Serializable{
     
     public void setDatos(){
         System.out.println("Introduce la cantidad: ");
-        this.ammount = utilidades.Utilidades.leerDouble(0,5000);
+        this.ammount = ejercicioBanco.utilidades.Utilidades.leerDouble(0,5000);
     }
 
     public long getMovementId() {

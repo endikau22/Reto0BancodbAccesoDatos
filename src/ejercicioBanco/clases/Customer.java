@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package ejercicioBanco.clases;
 
 import java.io.Serializable;
 
@@ -43,28 +43,28 @@ public class Customer implements Serializable{
         this.phone = phone;
         this.email = email;
     }
-    
+    /**
+     * Introducir datos de un cliente.
+     */
     public void setDatos(){
         System.out.println("Introduce nombre del cliente: ");
-        this.firstName = utilidades.Utilidades.introducirCadena();
-        System.out.println("Introduce el id del cliente: ");//esto seria dni pero igual mejor quitar y que sea un numero auto creado.
-        this.customerId = (long) utilidades.Utilidades.leerDouble();
+        this.firstName = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce apellido del cliente: ");
-        this.lastName = utilidades.Utilidades.introducirCadena();
+        this.lastName = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce segundo nombre del cliente: ");
-        this.middleInitial = utilidades.Utilidades.introducirCadena();
+        this.middleInitial = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce direccion: ");
-        this.street = utilidades.Utilidades.introducirCadena();
+        this.street = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce el numero de telefono:");
-        this.phone = (long) utilidades.Utilidades.leerInt(100000000,999999999);
+        this.phone = (long) ejercicioBanco.utilidades.Utilidades.leerInt(100000000,999999999);
         System.out.println("Introduce la ciudad: ");
-        this.city = utilidades.Utilidades.introducirCadena();
+        this.city = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce la provincia: ");
-        this.state = utilidades.Utilidades.introducirCadena();
+        this.state = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce el codigo postal: ");
-        this.zip = utilidades.Utilidades.leerInt(0,99999);
+        this.zip = ejercicioBanco.utilidades.Utilidades.leerInt(0,99999);
         System.out.println("Introduce el mail: ");
-        this.email = utilidades.Utilidades.introducirCadena();
+        this.email = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         
     }
 

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controlador;
+package ejercicioBanco.controlador;
 
-import clases.Customer;
+import ejercicioBanco.clases.Customer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,7 +23,7 @@ public class Dao {
     
     
     //private ResourceBundle fichero
-    ResourceBundle fichero;
+    private ResourceBundle fichero;
     private String dbBanco;
     private String url;
     private String user;

@@ -1,4 +1,4 @@
-package clases;
+package ejercicioBanco.clases;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -43,14 +43,16 @@ public class Account implements Serializable{
         this.beginBalanceTimestamp = beginBalanceTimestamp;
         this.type = type;
     }
-    
+    /**
+     * Introducir datos de una cuenta.
+     */
     public void setDatos(){
         System.out.println("Introduce id de la cuenta: ");
-        this.accountId = utilidades.Utilidades.leerInt();
+        this.accountId = ejercicioBanco.utilidades.Utilidades.leerInt();
         System.out.println("Introduce la descripcion de la cuenta: ");
-        this.description = utilidades.Utilidades.introducirCadena();
+        this.description = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce balance inicial: ");
-        this.beginBalance = utilidades.Utilidades.leerDouble();
+        this.beginBalance = ejercicioBanco.utilidades.Utilidades.leerDouble();
     }
      
     //GETTERS Y SETTERS

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elBanco;
+package ejercicioBanco.application;
 
-import controlador.Dao;
+import ejercicioBanco.controlador.Dao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Clase principal
+ * Clase principal. Contiene un menú con diferentes opciones a realizar en la BBDD.
  * @author 2dam
  */
 public class Application {
@@ -51,7 +51,10 @@ public class Application {
            }
         }while(opc !=9);
     }
-
+/**
+ * Muestra las diferentes opciones a realizar con la BBDD
+ * @return Un entero indicando la opción elegida dentro de las opciones del menú.
+ */
     private static int menu() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         int opc;
@@ -65,19 +68,24 @@ public class Application {
         System.out.println("7.-Realizar movimiento sobre una cuenta.");
         System.out.println("8.-Consultar movimientos de una cuenta.");
         System.out.println("9.-Salir.");
-        opc = utilidades.Utilidades.leerInt(1, 9);
+        opc = ejercicioBanco.utilidades.Utilidades.leerInt(1, 9);
         return opc;
     }
-
+/**
+ * Añadir un cliente a la base de datos.
+ */
     private static void crearNuevoCliente() {
        Dao dao = new Dao();
         try {
             dao.crearNuevoCliente();
         } catch (Exception ex) {
             System.out.println("Se ha producido un error al crear un nuevo cliente.");
+            ex.printStackTrace();
         }
     }
-
+/**
+ * Consultar información de un cliente
+ */
     private static void consultarCliente() {
        Dao dao = new Dao();
         try {
@@ -87,58 +95,70 @@ public class Application {
             ex.printStackTrace();
         }
     }
-
+/**
+ * Consultar las cuentas de un cliente.
+ */
     private static void consultarCuentasCliente() {
        Dao dao = new Dao(); 
         try {
             dao.consultarCuentasCliente();
         } catch (Exception ex) {
-            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
-
+/**
+ * Crear una nueva cuenta asociada a un cliente del banco.
+ */
     private static void crearCuenta() {
        Dao dao = new Dao(); 
         try {
             dao.crearCuenta();
         } catch (Exception ex) {
-            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+           ex.printStackTrace();
         }
     }
-
+/**
+ * Agregar una cuenta a un cliente bel banco.
+ */
     private static void agregarClienteCuenta() {
        Dao dao = new Dao();
         try {
             dao.agregarClienteCuenta();
         } catch (Exception ex) {
-            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+           ex.printStackTrace();
         }
     }
-
+/**
+ * Consultar datos de una cuenta.
+ */
     private static void consultarDatosCuenta() {
        Dao dao = new Dao();
         try {
             dao.consultarDatosCuenta();
         } catch (Exception ex) {
-            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+           ex.printStackTrace();
         }
     }
-
+/**
+ * Realizar un movimiento en relación a una cuenta.
+ */
     private static void movimientoCuenta() {
        Dao dao = new Dao();
         try {
             dao.movimientoCuenta();
         } catch (Exception ex) {
-            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+           ex.printStackTrace();
         }
     }
-
+/**
+ * Ver la información de los movimientos de una cuenta.
+ */
     private static void consultarMovimientos() {
        Dao dao = new Dao();
         try {
             dao.consultarMovimientos();
         } catch (Exception ex) {
-            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+           ex.printStackTrace();
         }
     }
 }
