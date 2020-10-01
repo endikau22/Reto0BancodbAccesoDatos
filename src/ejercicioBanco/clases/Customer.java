@@ -47,12 +47,12 @@ public class Customer implements Serializable{
      * Introducir datos de un cliente.
      */
     public void setDatos(){
+        System.out.println("Introduce el DNI: ");
+        this.customerId = (long) ejercicioBanco.utilidades.Utilidades.leerInt(0, 999999999);
         System.out.println("Introduce nombre del cliente: ");
         this.firstName = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce apellido del cliente: ");
         this.lastName = ejercicioBanco.utilidades.Utilidades.introducirCadena();
-        System.out.println("Introduce segundo nombre del cliente: ");
-        this.middleInitial = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce direccion: ");
         this.street = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce el numero de telefono:");
@@ -66,6 +66,16 @@ public class Customer implements Serializable{
         System.out.println("Introduce el mail: ");
         this.email = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         
+    }
+    /**
+     * Muestra por consola la información del cliente.
+     */
+    public void getDatos(){
+        System.out.println("Los datos del cliente: "+this.customerId);
+        System.out.println("Nombre: "+this.firstName);
+        System.out.println("Apellido: "+this.lastName);
+        System.out.println("Ciudad: "+this.city);
+        System.out.println("Telefono: "+this.phone);
     }
 
     //GETTERS Y SETTERS

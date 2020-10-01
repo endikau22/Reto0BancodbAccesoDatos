@@ -25,6 +25,10 @@ public class CustomerAccount implements Serializable{
         this.customerId = customerId;
     }
     
+    public void getDatos(){
+        
+    }
+    
     //GETTER Y SETTER
     public long getAccountId() {
         return accountId;

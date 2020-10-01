@@ -38,6 +38,10 @@ public class Movement implements Serializable{
         System.out.println("Introduce la cantidad: ");
         this.ammount = ejercicioBanco.utilidades.Utilidades.leerDouble(0,5000);
     }
+    
+    public void getDatos(){
+        
+    }
 
     public long getMovementId() {
         return movementId;

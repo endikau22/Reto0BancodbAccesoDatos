@@ -54,6 +54,10 @@ public class Account implements Serializable{
         System.out.println("Introduce balance inicial: ");
         this.beginBalance = ejercicioBanco.utilidades.Utilidades.leerDouble();
     }
+    
+    public void getDatos(){
+        
+    }
      
     //GETTERS Y SETTERS
 
