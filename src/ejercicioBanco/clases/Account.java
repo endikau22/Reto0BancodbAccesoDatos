@@ -3,6 +3,7 @@ package ejercicioBanco.clases;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * La clase Account se utiliza para leer y escribir cuentas bancarias en una base de datos de un Banco.
@@ -19,7 +20,7 @@ public class Account implements Serializable{
     private double balance;
     private double creditLine;
     private double beginBalance;
-    private LocalDate beginBalanceTimestamp;//o LOCALDATE o Timestamp
+    private Timestamp beginBalanceTimestamp;
     /**Tipo de la cuenta*/
     private int type;
     
@@ -34,7 +35,7 @@ public class Account implements Serializable{
      * @param balance
      * @param beginBalanceTimestamp
      * @param type*/
-    public Account(long accountId, String description, double balance, double creditLine, double beginBalance, LocalDate beginBalanceTimestamp, int type) {
+    public Account(long accountId, String description, double balance, double creditLine, double beginBalance, Timestamp beginBalanceTimestamp, int type) {
         this.accountId = accountId;
         this.description = description;
         this.balance = balance;
@@ -47,16 +48,28 @@ public class Account implements Serializable{
      * Introducir datos de una cuenta.
      */
     public void setDatos(){
-        System.out.println("Introduce id de la cuenta: ");
-        this.accountId = ejercicioBanco.utilidades.Utilidades.leerInt();
         System.out.println("Introduce la descripcion de la cuenta: ");
         this.description = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce balance inicial: ");
         this.beginBalance = ejercicioBanco.utilidades.Utilidades.leerDouble();
+        System.out.println("Introduce el tipo de cuenta: ");
+        this.type = ejercicioBanco.utilidades.Utilidades.leerInt(0, 1);
+        System.out.println("Introduce linea de cuenta: ");
+        this.creditLine = ejercicioBanco.utilidades.Utilidades.leerDouble();
+       
+        this.beginBalanceTimestamp = Timestamp.valueOf(LocalDateTime.now());
+        
+        this.balance = beginBalance;
     }
     
     public void getDatos(){
         
+        System.out.println("Los datos del la cuenta: "+this.accountId);
+        System.out.println("Descripcion: "+this.description);
+        System.out.println("Balance: "+this.balance);
+        System.out.println("Cuenta Bancaria: "+this.creditLine);
+        System.out.println("Tipo de cuenta: "+this.type);
+        System.out.println("Fecha apertura: "+this.beginBalanceTimestamp);
     }
      
     //GETTERS Y SETTERS
@@ -106,7 +119,7 @@ public class Account implements Serializable{
      *
      * @return La fecha de inicio de la cuenta.
      */
-    public LocalDate getBeginBalanceTimestamp() {
+    public Timestamp getBeginBalanceTimestamp() {
         return beginBalanceTimestamp;
     }
 
@@ -162,7 +175,7 @@ public class Account implements Serializable{
      *
      * @param beginBalanceTimestamp
      */
-    public void setBeginBalanceTimestamp(LocalDate beginBalanceTimestamp) {
+    public void setBeginBalanceTimestamp(Timestamp beginBalanceTimestamp) {
         this.beginBalanceTimestamp = beginBalanceTimestamp;
     }
 

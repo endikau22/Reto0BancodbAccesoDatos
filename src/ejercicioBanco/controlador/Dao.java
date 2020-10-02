@@ -5,6 +5,7 @@
  */
 package ejercicioBanco.controlador;
 
+import ejercicioBanco.clases.Account;
 import ejercicioBanco.clases.Customer;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -103,11 +104,62 @@ public class Dao {
     }
 
     public void consultarCuentasCliente()throws Exception {
-        String id = clienteAConsultar();
-        String select = "Select * from CustomerAccount where customerId = ?";
+        long id;
+        String select;
+        
+        System.out.println("Introduce el ID del cliente");
+        id = (long) ejercicioBanco.utilidades.Utilidades.leerInt();
+        select = "select * from account where id in(select accounts_id from customer_account where customers_id = ? )";
+        
+        openConnection ();
+        
+        stmt = con.prepareStatement(select);
+        stmt.setLong(1,id);
+        ResultSet rs = stmt.executeQuery();
+        
+        Account acc = new Account();
+        
+         while(rs.next()){
+             
+             acc.setAccountId(rs.getLong("id"));
+             acc.setBalance(rs.getDouble("balance"));
+             acc.setBeginBalance(rs.getDouble("beginBalance"));
+             acc.setBeginBalanceTimestamp(rs.getTimestamp("beginBalanceTimestamp"));
+             acc.setCreditLine(rs.getDouble("creditLine"));
+             acc.setDescription(rs.getString("description"));
+             acc.setType(rs.getInt("type"));
+             
+             acc.getDatos();
+         }
+        
+      
+        
     }
 
     public void crearCuenta()throws Exception {
+        
+       Account account = new Account();
+       account.setDatos();
+    
+       String insert = "Insert into account (city,email,firstName,lastName,middleInitial,"
+               + "phone,state,street,zip) values (?,?,?,?,?,?,?,?,?)";
+        
+        
+       
+             openConnection();
+             acc.setAccountId(rs.getLong("id"));
+             acc.setBalance(rs.getDouble("balance"));
+             acc.setBeginBalance(rs.getDouble("beginBalance"));
+             acc.setBeginBalanceTimestamp(rs.getTimestamp("beginBalanceTimestamp"));
+             acc.setCreditLine(rs.getDouble("creditLine"));
+             acc.setDescription(rs.getString("description"));
+             acc.setType(rs.getInt("type"));
+             
+             acc.getDatos();
+         
+        
+        
+        
       
     }
 
