@@ -57,22 +57,21 @@ public class Dao {
        Customer oneCustomer = new Customer();
        oneCustomer.setDatos();
     
-       String insert = "Insert into customer (id,city,email,firstName,lastName,middleInitial,"
-               + "phone,state,street,zip) values (?,?,?,?,?,?,?,?,?,?)";
+       String insert = "Insert into customer (city,email,firstName,lastName,middleInitial,"
+               + "phone,state,street,zip) values (?,?,?,?,?,?,?,?,?)";
        
        
        openConnection();
        stmt = con.prepareStatement(insert);
-       stmt.setLong(1,oneCustomer.getCustomerId());
-       stmt.setString(2,oneCustomer.getCity());
-       stmt.setString(3,oneCustomer.getEmail());
-       stmt.setString(4,oneCustomer.getFirstName());
-       stmt.setString(5,oneCustomer.getLastName());
-       stmt.setString(6,oneCustomer.getLastName().toUpperCase().substring(0, 1).concat("."));
-       stmt.setLong(7, oneCustomer.getPhone());
-       stmt.setString(8, oneCustomer.getState());
-       stmt.setString(9, oneCustomer.getStreet());
-       stmt.setInt(10, oneCustomer.getZip());
+       stmt.setString(1,oneCustomer.getCity());
+       stmt.setString(2,oneCustomer.getEmail());
+       stmt.setString(3,oneCustomer.getFirstName());
+       stmt.setString(4,oneCustomer.getLastName());
+       stmt.setString(5,oneCustomer.getLastName().toUpperCase().substring(0, 1).concat("."));
+       stmt.setLong(6, oneCustomer.getPhone());
+       stmt.setString(7, oneCustomer.getState());
+       stmt.setString(8, oneCustomer.getStreet());
+       stmt.setInt(9, oneCustomer.getZip());
        
        stmt.executeUpdate();
     }

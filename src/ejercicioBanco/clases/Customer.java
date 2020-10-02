@@ -47,8 +47,6 @@ public class Customer implements Serializable{
      * Introducir datos de un cliente.
      */
     public void setDatos(){
-        System.out.println("Introduce el DNI: ");
-        this.customerId = (long) ejercicioBanco.utilidades.Utilidades.leerInt(0, 999999999);
         System.out.println("Introduce nombre del cliente: ");
         this.firstName = ejercicioBanco.utilidades.Utilidades.introducirCadena();
         System.out.println("Introduce apellido del cliente: ");
