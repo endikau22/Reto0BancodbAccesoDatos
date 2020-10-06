@@ -8,7 +8,7 @@ package ejercicioBanco.clases;
 import java.io.Serializable;
 
 /**
- * Cuentas de los clientes del banco.
+ * Asocia las cuentas de los clientes del banco.
  * @author 2dam
  */
 public class CustomerAccount implements Serializable{

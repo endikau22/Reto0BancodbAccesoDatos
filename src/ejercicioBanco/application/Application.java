@@ -80,7 +80,6 @@ public class Application {
             dao.crearNuevoCliente();
         } catch (Exception ex) {
             System.out.println("Se ha producido un error al crear un nuevo cliente.");
-            ex.printStackTrace();
         }
     }
 /**
@@ -91,8 +90,7 @@ public class Application {
         try {
             dao.consultarCliente();
         } catch (Exception ex) {
-            System.out.println("No hay clientes en la base de datos.");
-            ex.printStackTrace();
+            System.out.println("No seha encontrado el cliente.");
         }
     }
 /**
@@ -103,7 +101,7 @@ public class Application {
         try {
             dao.consultarCuentasCliente();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("No hay cuentas que mostrar");
         }
     }
 /**
