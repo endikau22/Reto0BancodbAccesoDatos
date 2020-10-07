@@ -246,7 +246,7 @@ public class Dao implements DaoInterface{
         closeConnection();
     }
     
-    /**
+ /**
  * Pedir por consola el apellido de un cliente. Utilizado en el método consultar cliente.
  * @return El apellido de un cliente 
  */
@@ -366,7 +366,7 @@ public class Dao implements DaoInterface{
      */
     private long introducirClienteBBDD(Customer oneCustomer) throws Exception{
         long id = 0;
-        stmt = con.prepareStatement(insertarCustomer,com.mysql.jdbc.PreparedStatement.RETURN_GENERATED_KEYS);
+        stmt = con.prepareStatement(insertarCustomer,stmt.RETURN_GENERATED_KEYS);
                 stmt.setString(1,oneCustomer.getCity());
                 stmt.setString(2,oneCustomer.getEmail());
                 stmt.setString(3,oneCustomer.getFirstName());
@@ -398,7 +398,7 @@ public class Dao implements DaoInterface{
     
         openConnection();
         
-        stmt = con.prepareStatement(crearCuentaInsert,com.mysql.jdbc.PreparedStatement.RETURN_GENERATED_KEYS);
+        stmt = con.prepareStatement(crearCuentaInsert,stmt.RETURN_GENERATED_KEYS);
         stmt.setDouble(1,account.getBalance());
         stmt.setDouble(2,account.getBeginBalance());
         stmt.setTimestamp(3,account.getBeginBalanceTimestamp());
@@ -458,7 +458,7 @@ public class Dao implements DaoInterface{
        long idMovimiento = 0;//Devolver el id del movimiento
        
        openConnection();
-       stmt = con.prepareStatement(insertarMovimiento,com.mysql.jdbc.PreparedStatement.RETURN_GENERATED_KEYS);
+       stmt = con.prepareStatement(insertarMovimiento,stmt.RETURN_GENERATED_KEYS);
        stmt.setDouble(1, aMovement.getAmmount());
        stmt.setDouble(2, aMovement.getAmmount());
        stmt.setString(3, aMovement.getDescription());
