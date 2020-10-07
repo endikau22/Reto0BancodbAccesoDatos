@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
  * Encargada de conectar nuestra aplicación con la base de datos.
  * @author 2dam
  */
-public class Dao {
+public class Dao implements DaoInterface{
     private Connection con = null;
     private PreparedStatement stmt = null;
     
@@ -79,6 +79,8 @@ public class Dao {
      * @return Un long Variable que identifica a un cliente
      * @throws Exception 
      */
+        
+    @Override
     public long crearNuevoCliente() throws Exception {
        Customer oneCustomer = new Customer();
        oneCustomer.setDatos();
@@ -95,6 +97,7 @@ public class Dao {
      * Consultar los datos de un cliente.
      * @throws Exception 
      */
+    @Override
     public void consultarCliente()throws Exception {
         long id = clienteAConsultar();
   
@@ -111,6 +114,7 @@ public class Dao {
      * Consultar los datos de las cuentas de un cliente
      * @throws Exception 
      */
+    @Override
     public void consultarCuentasCliente()throws Exception {
         long id;//Variable para guardar el id del cliente que pedimos por pantalla para buscar en la bbdd.
         
@@ -132,6 +136,7 @@ public class Dao {
      * Crear una cuenta nueva y asociar la cuenta con un cliente en la tabla CustomerAccount
      * @throws Exception 
      */
+    @Override
     public void crearCuenta()throws Exception {
         long idCuenta;//Variable para guardar el id de la cuenta que insertamos, este id es generado por la BBDD.
         
@@ -150,6 +155,7 @@ public class Dao {
      * Agregar un cliente a una cuenta ya existente
      * @throws Exception 
      */
+    @Override
     public void agregarClienteCuenta()throws Exception {
         long idCliente, idCuenta;
         boolean hayCuenta,hayCliente;
@@ -172,6 +178,7 @@ public class Dao {
      * Consultar datos de una cuenta.
      * @throws Exception 
      */
+    @Override
     public void consultarDatosCuenta() throws Exception{
         long idCuenta;
         
@@ -185,6 +192,7 @@ public class Dao {
      * Realizar un movimiento a una cuenta
      * @throws Exception 
      */
+    @Override
     public void movimientoCuenta()throws Exception {
        long idCuenta;
        long idMovimiento;
@@ -205,6 +213,7 @@ public class Dao {
      * Consultar los movimientos de una cuenta
      * @throws Exception 
      */
+    @Override
     public void consultarMovimientos() throws Exception{
        long idCuenta;
         
@@ -253,7 +262,7 @@ public class Dao {
      * Recibido el id de un cliente devuelve un booleano
      * @param idCliente
      * @return True si encuentra el cliente en la BBDD y false en caso contrario
-     */
+     */  
     private boolean existeCliente(long idCliente) {
         boolean esta = false;
         String select = "Select * from customer where id = ?";
