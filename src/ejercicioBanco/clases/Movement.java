@@ -52,7 +52,7 @@ public class Movement implements Serializable{
             this.description = "Payment";
             this.balance -= this.ammount;
         }
-        this.databaseDate = Timestamp.valueOf(LocalDateTime.now());
+        this.databaseDate = Timestamp.valueOf(LocalDateTime.now()); 
         System.out.println("Introduce el id de la cuenta bancaria ");
         this.accountId = (long) Utilidades.leerInt();     
     }

@@ -77,7 +77,8 @@ public class Application {
     private static void crearNuevoCliente() {
        Dao dao = new Dao();
         try {
-            dao.crearNuevoCliente();
+            long id = dao.crearNuevoCliente();
+            System.out.println("El cliente con el id: "+id+" ha sido dado de alta correctamente.");
         } catch (Exception ex) {
             System.out.println("Se ha producido un error al crear un nuevo cliente.");
         }
