@@ -7,208 +7,82 @@ package ejercicioBanco.controlador;
 
 import ejercicioBanco.clases.Account;
 import ejercicioBanco.clases.Customer;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
+import ejercicioBanco.clases.Movement;
+import ejercicioBanco.excepciones.AccountNotExistException;
+import ejercicioBanco.excepciones.CustomerNotExistException;
+import ejercicioBanco.excepciones.EmailExistException;
+import java.util.List;
 
 /**
- * Encargada de conectar nuestra aplicación con la base de datos.
- * @author 2dam
+ * Dao interface. Contains the methods for the bank management. The information is stored in a SQL database.
+ * The following methods excute queries agaist the database.
+ * @author Endika Ubierna.
  */
-public class Dao {
-    private Connection con = null;
-    private PreparedStatement stmt = null;
+public interface Dao{
+    /**
+     * Creates a new bank customer.
+     * @param customer The new customer.
+     * @return The client id.
+     * @throws Exception A generic exception.
+     * @throws EmailExistException Thrown when the email is registered.
+     */
+    public long crearNuevoCliente(Customer customer) throws Exception,EmailExistException;
+    /**
+     * Gets a {@link Customer} information.
+     * @param email The customer email.
+     * @return A <code>Customer</code>.
+     * @throws Exception A generic exception.
+     * @throws CustomerNotExistException Thrown when the customer is not registered.
+     */
+    public Customer consultarCliente(String email) throws Exception,CustomerNotExistException;
+    /**
+     * Gets all the accounts of a {@link Customer}.
+     * @param email The customer email.
+     * @return A List of accounts.
+     * @throws Exception A generic exception.
+     */
+    public List<Account> consultarCuentasCliente(String email)throws Exception;
+    /**
+     * Creates a new <code>Account</code>. The account is asociated to a bank {@link Customer}.
+     * @param customer A customer.
+     * @param account An account.
+     * @throws Exception A generic exception.
+     */
+    public void crearCuenta(Customer customer,Account account)throws Exception;
+    /**
+     * Adds a new <code>Customer</code> to an {@link Account}.
+     * @param account An <code>Account</code>.
+     * @param customer A <code>Customer</code>.
+     * @throws Exception A generic exception.
+     */
+    public void agregarClienteCuenta(Account account,Customer customer)throws Exception;
+    /**
+     * Gets an Account information.
+     * @param idCuenta An <code>Account</code> id.
+     * @throws Exception A generic exception.
+     * @throws AccountNotExistException Exception thrown when the account don´t exist.
+     * @return An account which id is the one passed as parameter.
+     */
+    public Account consultarDatosCuenta(Long idCuenta) throws Exception,AccountNotExistException;
+    /**
+     * Creates a <code>Movement</code> into an <code>Account</code>
+     * @param movement The movement to be registered.
+     * @param account The account subject from the movement.
+     * @throws Exception A generic exception.
+     */
+    public void movimientoCuenta(Movement movement,Account account)throws Exception;
+    /**
+     * Gets the information of movements from an <code>Account</code>.
+     * @param account An account.
+     * @throws Exception A generic exception.
+     * @return A list with an account movements.
+     */
+    public List<Movement> consultarMovimientos(Account account) throws Exception;
+    /**
+     * Gets a list of the bank {@link Customer}.
+     * @return A <code>List</code> of {@link Customer}.
+     * @throws Exception A generic exception.
+     */
+    public List<Customer> listarCustomers()throws Exception;
     
-    
-    //private ResourceBundle fichero
-    private ResourceBundle fichero;
-    private String dbBanco;
-    private String url;
-    private String user;
-    private String passwd;
-    private String driver;
-   
-    public Dao() {
-       fichero = ResourceBundle.getBundle("ejercicioBanco.controlador.config");
-       dbBanco = fichero.getString("DB");
-       url = fichero.getString("Conn");
-       user = fichero.getString("DBUser");
-       passwd = fichero.getString("DBPass");
-       driver = fichero.getString("Driver");
-    }
-    
-	private void openConnection() {
-            try{
-                Class.forName(driver);
-		con = DriverManager.getConnection(url,user,passwd);
-            }catch(Exception e){
-                System.out.println("No se conecta");
-            }
-	}
-
-	private void closeConnection() throws SQLException {
-		stmt.close();
-		con.close();
-	}
-
-    public void crearNuevoCliente() throws Exception {
-       Customer oneCustomer = new Customer();
-       oneCustomer.setDatos();
-    
-       String insert = "Insert into customer (city,email,firstName,lastName,middleInitial,"
-               + "phone,state,street,zip) values (?,?,?,?,?,?,?,?,?)";
-       
-       
-       openConnection();
-       stmt = con.prepareStatement(insert);
-       stmt.setString(1,oneCustomer.getCity());
-       stmt.setString(2,oneCustomer.getEmail());
-       stmt.setString(3,oneCustomer.getFirstName());
-       stmt.setString(4,oneCustomer.getLastName());
-       stmt.setString(5,oneCustomer.getLastName().toUpperCase().substring(0, 1).concat("."));
-       stmt.setLong(6, oneCustomer.getPhone());
-       stmt.setString(7, oneCustomer.getState());
-       stmt.setString(8, oneCustomer.getStreet());
-       stmt.setInt(9, oneCustomer.getZip());
-       
-       stmt.executeUpdate();
-    }
-
-    public void consultarCliente()throws Exception {
-        String id = clienteAConsultar();
-        String select = "Select * from customer where id = ?";
-        openConnection();
-        stmt = con.prepareStatement(select);
-        stmt.setString(1,id);
-        ResultSet rs = stmt.executeQuery();
-        Customer unCustomer = new Customer();
-        while(rs.next()){
-            unCustomer.setCity(rs.getString("city"));
-            unCustomer.setCustomerId(rs.getLong("id"));
-            unCustomer.setEmail(rs.getString("email"));
-            unCustomer.setFirstName(rs.getString("firstName"));
-            unCustomer.setLastName(rs.getString("lastName"));
-            unCustomer.setMiddleInitial(rs.getString("middleInitial"));
-            unCustomer.setStreet(rs.getString("street"));
-            unCustomer.setPhone(rs.getLong("phone"));
-            unCustomer.setZip(rs.getInt("zip"));
-            unCustomer.setState(rs.getString("state"));
-            
-            unCustomer.getDatos();
-        }
-        rs.close();
-        closeConnection();
-    }
-
-    public void consultarCuentasCliente()throws Exception {
-        long id;
-        String select;
-        
-        System.out.println("Introduce el ID del cliente");
-        id = (long) ejercicioBanco.utilidades.Utilidades.leerInt();
-        select = "select * from account where id in(select accounts_id from customer_account where customers_id = ? )";
-        
-        openConnection ();
-        
-        stmt = con.prepareStatement(select);
-        stmt.setLong(1,id);
-        ResultSet rs = stmt.executeQuery();
-        
-        Account acc = new Account();
-        
-         while(rs.next()){
-             
-             acc.setAccountId(rs.getLong("id"));
-             acc.setBalance(rs.getDouble("balance"));
-             acc.setBeginBalance(rs.getDouble("beginBalance"));
-             acc.setBeginBalanceTimestamp(rs.getTimestamp("beginBalanceTimestamp"));
-             acc.setCreditLine(rs.getDouble("creditLine"));
-             acc.setDescription(rs.getString("description"));
-             acc.setType(rs.getInt("type"));
-             
-             acc.getDatos();
-         }
-        
-      
-        
-    }
-
-    public void crearCuenta()throws Exception {
-        
-       Account account = new Account();
-       account.setDatos();
-    
-       String insert = "Insert into account (city,email,firstName,lastName,middleInitial,"
-               + "phone,state,street,zip) values (?,?,?,?,?,?,?,?,?)";
-        
-        
-       
-             openConnection();
-             acc.setAccountId(rs.getLong("id"));
-             acc.setBalance(rs.getDouble("balance"));
-             acc.setBeginBalance(rs.getDouble("beginBalance"));
-             acc.setBeginBalanceTimestamp(rs.getTimestamp("beginBalanceTimestamp"));
-             acc.setCreditLine(rs.getDouble("creditLine"));
-             acc.setDescription(rs.getString("description"));
-             acc.setType(rs.getInt("type"));
-             
-             acc.getDatos();
-         
-        
-        
-        
-      
-    }
-
-    public void agregarClienteCuenta()throws Exception {
-        
-    }
-
-    public void consultarDatosCuenta() throws Exception{
-       
-    }
-
-    public void movimientoCuenta()throws Exception {
-       
-    }
-
-    public void consultarMovimientos() throws Exception{
-        
-    }
-/**
- * Método que es invocado por el método crear nuevo cliente.
- * Pide datos de un usuario, utilizando el método setDatos() de la clase Customer.
- * @return Un string, el insert into.
- */
-    private String usuarioNuevo() {
-       Customer oneCustomer = new Customer();
-       oneCustomer.setDatos();
-       long id = oneCustomer.getCustomerId();
-       String ciudad = oneCustomer.getCity();
-       String email = oneCustomer.getEmail();
-       String nombre = oneCustomer.getFirstName();
-       String apellido = oneCustomer.getLastName();
-       String inicial = oneCustomer.getLastName().toUpperCase().substring(0, 1).concat(".");
-       long telefono = oneCustomer.getPhone();
-       String provincia = oneCustomer.getState();
-       String calle = oneCustomer.getStreet();
-       int codigoPostal = oneCustomer.getZip();
-       String insert = "Insert into customer (id,city,email,firstName,lastName,middleInitial,"
-               + "phone,state,street,zip) values (?,?,?,?,?,?,?,?,?,?)";
-       return insert;
-    }
-/**
- * Pedir por consola el apellido de un cliente. Utilizado en el método consultar cliente.
- * @return El apellido de un cliente 
- */
-    private String clienteAConsultar(){
-        String id;
-        
-        System.out.println("Introduce el DNI del cliente que buscas");
-        id = ejercicioBanco.utilidades.Utilidades.introducirCadena();
-        return id;
-    }
 }
