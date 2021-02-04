@@ -5,37 +5,55 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
- * La clase Account se utiliza para leer y escribir cuentas bancarias en una base de datos de un Banco.
+ * Class representing the bank account for customers.
  * @version 1.0
- * @author 2dam
- * 
+ * @author Endika Ubierna.
  */
 public class Account implements Serializable{
-    /**identificador de la cuenta*/
+    /**
+     * Account identifier.
+     */
     private long accountId;
-    /**descripcion de la cuenta*/
+    /**
+     * Account description.
+     */
     private String description;
-    /**identificador de la cuenta*/
+    /**
+     * Account current balance.
+     */
     private double balance;
+    /**
+     * Account current credit line.
+     */
     private double creditLine;
+    /**
+     * Account begin balance.
+     */
     private double beginBalance;
+    /**
+     * Account begin balance date.
+     */
     private Timestamp beginBalanceTimestamp;
-    /**Tipo de la cuenta*/
+    /**
+     * Account type.
+     */
     private int type;
     
-    /**CONSTRUCTOR VACIO*/
+    /**
+     * Class constructor without parameters
+     */
      public Account() {
     }
-    /**Este constructor recibe todos los parametros de los atributos de la clas
-     * @param accountId
-     * @param description
-     * @param beginBalance
-     * @param creditLine
-     * @param balance
-     * @param beginBalanceTimestamp
-     * @param type*/
-    public Account(long accountId, String description, double balance, double creditLine, double beginBalance, Timestamp beginBalanceTimestamp, int type) {
-        this.accountId = accountId;
+    /**
+     * Class Account constructor with parameters.
+     * @param description Account description.
+     * @param beginBalance Account current balance.
+     * @param creditLine Account current credit line.
+     * @param balance Account begin balance.
+     * @param beginBalanceTimestamp Account begin balance date.
+     * @param type Account type.
+     */
+    public Account(String description, double balance, double creditLine, double beginBalance, Timestamp beginBalanceTimestamp, int type) {
         this.description = description;
         this.balance = balance;
         this.creditLine = creditLine;
@@ -44,7 +62,7 @@ public class Account implements Serializable{
         this.type = type;
     }
     /**
-     * Introducir datos de una cuenta.
+     * This method allows to introduce account information from console.
      */
     public void setDatos(){
         System.out.println("Introduce la descripcion de la cuenta: ");
@@ -60,9 +78,8 @@ public class Account implements Serializable{
     }
     
     /**
-     * Muestra por pantalla los datos de la cuenta.
+     * Method shows in console an account information.
      */
-    
     public void getDatos(){
         System.out.println("Los datos del la cuenta: "+this.accountId);
         System.out.println("Descripcion: "+this.description);
@@ -75,113 +92,102 @@ public class Account implements Serializable{
     //GETTERS Y SETTERS
 
     /**
-     *
-     * @return un numero con el identificador de la cuenta
+     * Gets an account id.
+     * @return The account id number. It is also the account database primary key.
      */
-
     public long getAccountId() {
         return accountId;
     }
-
     /**
-     *
-     * @return La descripcion de la cuenta
+     * Gets the account description.
+     * @return The account description.
      */
     public String getDescription() {
         return description;
     }
-
     /**
-     *
-     * @return El balance de la cuenta.
+     * Gets the account balance
+     * @return The account balance.
      */
     public double getBalance() {
         return balance;
     }
-
     /**
-     *
-     * @return La linea de credito de la cuenta
+     * Gets the account creditline.
+     * @return The account creditline.
      */
     public double getCreditLine() {
         return creditLine;
     }
-
     /**
-     *
-     * @return 
+     * Gets the account begin balance.
+     * @return The account begin balance.
      */
     public double getBeginBalance() {
         return beginBalance;
     }
-
     /**
-     *
-     * @return La fecha de inicio de la cuenta.
+     * Gets the account beginbalance date.
+     * @return The account beginbalance date.
      */
     public Timestamp getBeginBalanceTimestamp() {
         return beginBalanceTimestamp;
     }
-
     /**
-     *
-     * @return El tipo de la cuenta.
+     * Gets the account type.
+     * @return The account type.
      */
     public int getType() {
         return type;
-    }
-
+    } 
     /**
-     *
-     * @param accountId
+     * Sets the account id.
+     * @param accountId The account id.
      */
     public void setAccountId(long accountId) {
         this.accountId = accountId;
     }
-
     /**
-     *
-     * @param description
+     * Sets the account description.
+     * @param description The account description.
      */
     public void setDescription(String description) {
         this.description = description;
     }
-
     /**
-     *
-     * @param balance
+     * Sets the account balance.
+     * @param balance the account balance.
      */
     public void setBalance(double balance) {
         this.balance = balance;
     }
-
     /**
-     *
-     * @param creditLine
+     * Sets the account credit line.
+     * @param creditLine The account credit line.
      */
     public void setCreditLine(double creditLine) {
         this.creditLine = creditLine;
     }
 
     /**
-     *
-     * @param beginBalance
+     * Sets the account begin balance.
+     * @param beginBalance The account begin balance.
      */
     public void setBeginBalance(double beginBalance) {
         this.beginBalance = beginBalance;
     }
 
     /**
-     *
-     * @param beginBalanceTimestamp
+     * Sets the account begin balance date.
+     * @param beginBalanceTimestamp The account begin balance date.
      */
     public void setBeginBalanceTimestamp(Timestamp beginBalanceTimestamp) {
         this.beginBalanceTimestamp = beginBalanceTimestamp;
     }
 
     /**
-     *
-     * @param type Tipo de la cuenta.
+     * Sets the account type.
+     * @param type The account type.
      */
     public void setType(int type) {
         this.type = type;
